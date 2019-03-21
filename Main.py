@@ -140,16 +140,23 @@ def handler_messaggio(msg):
             print(str(mittente_username)+" invoked /roll")
             print(str(time.time())+" : "+str(mittente_username)+" invoked /roll",file=logfile)
             parametri = comando.lower().strip().split(" ")
+            comando.pop(0)
             somma_dadi = 0
             somma_costanti = 0
             stringa = "@"+str(mittente_username)+"\n"
             for token in parametri:
+                print("token: ", token)
                 if (token.isdecimal()):
+                    print("identified as constant")
                     somma_costanti += int(token)
                 else:
+                    print("identified as dice")
                     dice = token.split("d")
+                    print("dice: ", dice)
                     dice_type = int(dice[1])
                     dice_number = 1
+                    print("dice_type: ", dice_type)
+                    print("dice_number: ", dice_number)
                     if (dice[0] != ""):
                         dice_number = int(dice[0])
                     stringa += "Tirando "+str(dice_number)+" volte un D"+str(dice_type)+" ho ottenuto:\n"
