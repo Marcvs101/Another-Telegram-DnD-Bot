@@ -1,12 +1,15 @@
 ## DICE ROLL MODULE
+from random import randint
+
 def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_voce):
     parametri = comando.lower().strip().split(" ")
+    parametri.pop(0)
     somma_dadi = 0
     somma_costanti = 0
     expected_value = 0
     stringa = "@"+str(mittente_username)+"\n"
     for token in parametri:
-        if (token.isdecimal()):
+        if (token.find("d")<0):
             somma_costanti += int(token)
         else:
             dice = token.split("d")
