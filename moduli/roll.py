@@ -14,7 +14,6 @@ def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_vo
         else:
             dice = token.split("d")
             dice_type = int(dice[1])
-            expected_value += (1 + dice_type) / 2
             dice_number = 1
             if (dice[0] != ""):
                 dice_number = int(dice[0])
@@ -23,6 +22,7 @@ def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_vo
                 dice_roll = randint(1, dice_type)
                 stringa += "- "+str(dice_roll)+"\n"
                 somma_dadi += dice_roll
+                expected_value += (1 + dice_type) / 2
     stringa += "Totale: "+str(somma_dadi)
     if (somma_costanti > 0):
         stringa += " + "+str(somma_costanti)+" -> "+str(somma_dadi + somma_costanti)
