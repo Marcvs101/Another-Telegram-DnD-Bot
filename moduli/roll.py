@@ -1,6 +1,8 @@
 ## DICE ROLL MODULE
+from random import randint
+
 def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_voce):
-    parametri = comando.lower().strip().split(" ")
+    parametri = comando.lower().strip().split(" ",1)[1].split(" ")
     somma_dadi = 0
     somma_costanti = 0
     stringa = "@"+str(mittente_username)+"\n"

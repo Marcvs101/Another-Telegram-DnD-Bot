@@ -4,7 +4,7 @@ from gtts import gTTS   #Google TTS
 # System
 import json
 from tempfile import NamedTemporaryFile
-from random import randint
+import random
 import httplib2
 import os
 import time
