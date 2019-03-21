@@ -126,37 +126,27 @@ def handler_messaggio(msg):
         elif comando.startswith("/roll"):
             print(str(mittente_username)+" invoked /roll")
             print(str(time.time())+" : "+str(mittente_username)+" invoked /roll",file=logfile)
-            parametri = comando.split(" ")
-            paramDado = parametri[1].strip().lower().split("d",1)
-
-            paramModificatore = 0
-            if (len(parametri) >= 3):
-                if (parametri[2].strip().replace("-","").replace("+","").isdigit()):
-                    paramModificatore = int(parametri[2])
-
-            if (len(paramDado) >= 2):
-                if (paramDado[1].replace("d","").strip().isdigit()):
-                    num = 1
-                    if paramDado[0].strip().isdigit():
-                        num = int(paramDado[0].strip())
-                    dado = int(paramDado[1].replace("d","").strip())
-
-            stringa = ("@"+str(mittente_username)+"\n"+
-                           "Tirando "+str(num)+" volte un D"+
-                           str(dado)+" ho ottenuto:\n")
-
-            somma = 0
-            for i in range(num):
-                tiro = randint(1,dado)
-                somma = somma + tiro
-                stringa = stringa+" "+str(i+1)+"- "+str(tiro)+"\n"
-            stringa = stringa + "Totale: "+str(somma)
-    
-            if paramModificatore > 0:
-                stringa = stringa + "+" + str(paramModificatore) + " -> " + str(somma+paramModificatore)
-            if paramModificatore < 0:
-                stringa = stringa + str(paramModificatore) + " -> " + str(somma+paramModificatore)
-
+            parametri = comando.lower().strip().split(" ")
+            somma_dadi = 0
+            somma_costanti = 0
+            stringa = "@"+str(mittente_username)+"\n"
+            for token in parametri:
+                if (token.isdecimal()):
+                    somma_costanti += int(token)
+                else:
+                    dice = token.split("d")
+                    dice_type = int(dice[1])
+                    dice_number = 1
+                    if (dice[0] != ""):
+                        dice_number = int(dice[0])
+                    stringa += "Tirando "+str(dice_number)+" volte un D"+str(dice_type)+" ho ottenuto:\n"
+                    for _ in range(dice_number):
+                        dice_roll = randint(1, dice_type)
+                        stringa += "- "+str(dice_roll)+"\n"
+                        somma_dadi += dice_roll
+            stringa += "Totale: "+str(somma_dadi)
+            if (somma_costanti > 0):
+                stringa += " + "+str(somma_costanti)+" -> "+str(somma_dadi + somma_costanti)
             if speech: invia_voce(chat["id"],stringa)
             else: invia_testo(chat["id"],stringa)
 
