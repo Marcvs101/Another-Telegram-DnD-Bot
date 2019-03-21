@@ -3,6 +3,7 @@ def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_vo
     parametri = comando.lower().strip().split(" ")
     somma_dadi = 0
     somma_costanti = 0
+    expected_value = 0
     stringa = "@"+str(mittente_username)+"\n"
     for token in parametri:
         if (token.isdecimal()):
@@ -10,6 +11,7 @@ def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_vo
         else:
             dice = token.split("d")
             dice_type = int(dice[1])
+            expected_value += (1 + dice_type) / 2
             dice_number = 1
             if (dice[0] != ""):
                 dice_number = int(dice[0])
@@ -21,5 +23,6 @@ def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_vo
     stringa += "Totale: "+str(somma_dadi)
     if (somma_costanti > 0):
         stringa += " + "+str(somma_costanti)+" -> "+str(somma_dadi + somma_costanti)
+    stringa += "\n(Expected Value: "+str(expected_value + somma_costanti)+")"
     if speech: invia_voce(chat["id"],stringa)
     else: invia_testo(chat["id"],stringa)
