@@ -14,6 +14,8 @@ import re
 
 # Moduli
 import moduli.tts as tts
+import moduli.roll as roll
+import moduli.stats as stats
 
 telegram_path = "../Chiavi/Telegram.txt"
 logfile_path = "../Debug/logfile.log"
@@ -118,22 +120,7 @@ def handler_messaggio(msg):
         elif comando.startswith("/stats"):
             print(str(mittente_username)+" invoked /stats")
             print(str(time.time())+" : "+str(mittente_username)+" invoked /stats",file=logfile)
-            elapsedtime = time.time()-start_time
-            canali_nomi = ""
-            
-            for i in canali.values():
-                canali_nomi = canali_nomi + "\n- " + i
-            
-            stringa = ("@"+str(mittente_username)+"\n"+
-                            "Il bot è in funzione da "+
-                            str(math.floor(elapsedtime%60))+" secondi, "+
-                            str(math.floor((elapsedtime/60)%60))+" minuti, "+
-                            str(math.floor((elapsedtime/60/60)%24))+" ore, "+
-                            str(math.floor((elapsedtime/60/60/24)))+" giorni\n"+
-                            "Inoltre sono presente nei seguenti canali:"+canali_nomi)
-            
-            if speech: invia_voce(chat["id"],stringa)
-            else: invia_testo(chat["id"],stringa)
+            stats.stats(mittente_username, comando, chat, canali, speech, invia_testo, invia_voce)
 
 
         elif comando.startswith("/roll"):
@@ -200,7 +187,9 @@ def handler_messaggio(msg):
 
 
         elif comando.startswith("/tts"):
-            tts.tts(mittente_username, comando, chat, canali, logfile, invia_voce, time)
+            print(str(mittente_username)+" invoked /tts")
+            print(str(time.time())+" : "+str(mittente_username)+" invoked /tts",file=logfile)
+            tts.tts(mittente_username, comando, chat, canali, invia_voce)
 
 
         elif comando.startswith("/debug"):

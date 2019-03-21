@@ -1,7 +1,5 @@
 ## TEXT TO SPEECH MODULE
-def tts(mittente_username, comando, chat, canali, logfile, invia_voce, time):
-    print(str(mittente_username)+" invoked /tts")
-    print(str(time.time())+" : "+str(mittente_username)+" invoked /tts",file=logfile)
+def tts(mittente_username, comando, chat, canali, invia_voce):
     parametri = comando.split(" ",1)
 	
     if parametri[1].strip().startswith("/broadcast"):
