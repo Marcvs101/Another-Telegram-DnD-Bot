@@ -157,7 +157,7 @@ def handler_messaggio(msg):
         elif comando.startswith("/tts"):
             print(str(mittente_username)+" invoked /tts")
             print(str(time.time())+" : "+str(mittente_username)+" invoked /tts",file=logfile)
-            tts.tts(mittente_username, comando, chat, canali, invia_voce)
+            tts.tts(mittente_username, comando, chat, canali, logfile, invia_voce)
 
 
         elif comando.startswith("/debug"):

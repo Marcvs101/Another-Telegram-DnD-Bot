@@ -1,5 +1,5 @@
 ## TEXT TO SPEECH MODULE
-def tts(mittente_username, comando, chat, canali, invia_voce):
+def tts(mittente_username, comando, chat, canali, logfile, invia_voce):
     parametri = comando.split(" ",1)
 	
     if parametri[1].strip().startswith("/broadcast"):
