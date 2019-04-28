@@ -120,7 +120,7 @@ def handler_messaggio(msg):
         elif comando.startswith("/stats"):
             print(str(mittente_username)+" invoked /stats")
             print(str(time.time())+" : "+str(mittente_username)+" invoked /stats",file=logfile)
-            stats.stats(mittente_username, comando, chat, canali, speech, invia_testo, invia_voce)
+            stats.stats(mittente_username, comando, start_time, chat, canali, speech, invia_testo, invia_voce)
 
 
         elif comando.startswith("/roll"):
