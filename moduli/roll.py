@@ -3,7 +3,7 @@ from strutture.messaggio import Messaggio
 
 ## DICE ROLL MODULE
 
-def roll(mittente_username, comando, chat, dati, speech):
+def roll(mittente, comando, chat, dati, speech):
     messaggi = []
     
     parametri = comando.lower().strip().split(" ")
@@ -12,7 +12,7 @@ def roll(mittente_username, comando, chat, dati, speech):
     somma_costanti = 0
     expected_value = 0
     
-    stringa = "@"+str(mittente_username)+"\n"
+    stringa = "@"+str(mittente["username"])+"\n"
     for token in parametri:
         if (token.find("d")<0):
             somma_costanti += int(token)

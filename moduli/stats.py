@@ -3,7 +3,7 @@ import math
 from strutture.messaggio import Messaggio
 
 ## STATS MODULE
-def stats(mittente_username, comando, start_time, chat, dati, speech):
+def stats(mittente, comando, start_time, chat, dati, speech):
     messaggi = []
     
     elapsedtime = time.time()-start_time
@@ -12,7 +12,7 @@ def stats(mittente_username, comando, start_time, chat, dati, speech):
     for i in dati["canali"].values():
         canali_nomi = canali_nomi + "\n- " + i
 
-    stringa = ("@"+str(mittente_username)+"\n"+
+    stringa = ("@"+str(mittente["username"])+"\n"+
                     "Il bot è in funzione da "+
                     str(math.floor(elapsedtime%60))+" secondi, "+
                     str(math.floor((elapsedtime/60)%60))+" minuti, "+

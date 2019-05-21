@@ -2,7 +2,7 @@ from strutture.messaggio import Messaggio
 
 ## TEXT TO SPEECH MODULE
 
-def tts(mittente_username, comando, chat, dati, logfile):
+def tts(mittente, comando, chat, dati, logfile):
     messaggi = []
 
     if comando.strip().startswith("/broadcast"):
