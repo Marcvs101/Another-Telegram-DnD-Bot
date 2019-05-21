@@ -1,9 +1,15 @@
+import time
+import math
+from strutture.messaggio import Messaggio
+
 ## STATS MODULE
-def stats(mittente_username, comando, chat, canali, speech, invia_testo, invia_voce):
+def stats(mittente_username, comando, start_time, chat, dati, speech):
+    messaggi = []
+    
     elapsedtime = time.time()-start_time
     canali_nomi = ""
 
-    for i in canali.values():
+    for i in dati["canali"].values():
         canali_nomi = canali_nomi + "\n- " + i
 
     stringa = ("@"+str(mittente_username)+"\n"+
@@ -14,5 +20,5 @@ def stats(mittente_username, comando, chat, canali, speech, invia_testo, invia_v
                     str(math.floor((elapsedtime/60/60/24)))+" giorni\n"+
                     "Inoltre sono presente nei seguenti canali:"+canali_nomi)
 
-    if speech: invia_voce(chat["id"],stringa)
-    else: invia_testo(chat["id"],stringa)
+    messaggi.append(Messaggio(stringa,chat["id"],speech))
+    return messaggi

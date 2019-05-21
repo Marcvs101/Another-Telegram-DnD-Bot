@@ -1,12 +1,17 @@
-## DICE ROLL MODULE
 from random import randint
+from strutture.messaggio import Messaggio
 
-def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_voce):
+## DICE ROLL MODULE
+
+def roll(mittente_username, comando, chat, dati, speech):
+    messaggi = []
+    
     parametri = comando.lower().strip().split(" ")
-    parametri.pop(0)
+    
     somma_dadi = 0
     somma_costanti = 0
     expected_value = 0
+    
     stringa = "@"+str(mittente_username)+"\n"
     for token in parametri:
         if (token.find("d")<0):
@@ -23,9 +28,11 @@ def roll(mittente_username, comando, chat, canali, speech, invia_testo, invia_vo
                 stringa += "- "+str(dice_roll)+"\n"
                 somma_dadi += dice_roll
                 expected_value += (1 + dice_type) / 2
+
     stringa += "Totale: "+str(somma_dadi)
     if (somma_costanti > 0):
         stringa += " + "+str(somma_costanti)+" -> "+str(somma_dadi + somma_costanti)
     stringa += "\n(Expected Value: "+str(expected_value + somma_costanti)+")"
-    if speech: invia_voce(chat["id"],stringa)
-    else: invia_testo(chat["id"],stringa)
+
+    messaggi.append(Messaggio(stringa,chat["id"],speech))
+    return messaggi
