@@ -20,6 +20,7 @@ import moduli.tts as tts
 import moduli.roll as roll
 import moduli.stats as stats
 import moduli.player as player
+import moduli.spells as spells
 
 telegram_path = "../Chiavi/Telegram.txt"
 logfile_path = "../Debug/logfile.log"
@@ -126,17 +127,22 @@ def handler_messaggio(msg):
         elif comando.startswith("/stats"):
             print(str(mittente["username"])+" invoked /stats")
             print(str(time.time())+" : "+str(mittente["username"])+" invoked /stats",file=logfile)
-            messaggi = stats.stats(mittente, comando.replace("/stats","",1), start_time, chat, dati, speech)
+            messaggi = stats.stats(mittente, comando.replace("/stats","",1).strip(), start_time, chat, dati, speech)
 
         elif comando.startswith("/roll"):
             print(str(mittente["username"])+" invoked /roll")
             print(str(time.time())+" : "+str(mittente["username"])+" invoked /roll",file=logfile)
-            messaggi = roll.roll(mittente, comando.replace("/roll","",1), chat, dati, speech)
+            messaggi = roll.roll(mittente, comando.replace("/roll","",1).strip(), chat, dati, speech)
 
         elif comando.startswith("/player"):
             print(str(mittente["username"])+" invoked /player in "+str(chat["type"])+" chat")
             print(str(time.time())+" : "+str(mittente["username"])+" invoked /player in "+str(chat["type"])+" chat",file=logfile)
-            messaggi = player.player(mittente, comando.replace("/player","",1), chat, dati, speech, logfile)
+            messaggi = player.player(mittente, comando.replace("/player","",1).strip(), chat, dati, speech, logfile)
+
+        elif comando.startswith("/spells"):
+            print(str(mittente["username"])+" invoked /spells in "+str(chat["type"])+" chat")
+            print(str(time.time())+" : "+str(mittente["username"])+" invoked /spells in "+str(chat["type"])+" chat",file=logfile)
+            messaggi = spells.spells(mittente, comando.replace("/spells","",1).strip(), chat, dati, speech, logfile)
 
 ##        elif comando.startswith("/sendto"):
 ##            print(str(mittente["username"])+" invoked /sendto")
@@ -164,7 +170,7 @@ def handler_messaggio(msg):
         elif comando.startswith("/tts"):
             print(str(mittente["username"])+" invoked /tts")
             print(str(time.time())+" : "+str(mittente["username"])+" invoked /tts",file=logfile)
-            messaggi = tts.tts(mittente, comando.replace("/tts","",1), chat, dati, logfile)
+            messaggi = tts.tts(mittente, comando.replace("/tts","",1).strip(), chat, dati, logfile)
 
         elif comando.startswith("/debug"):
             print(str(mittente["username"])+" invoked /debug\n"+
