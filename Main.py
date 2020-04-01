@@ -1,17 +1,19 @@
-import telepot          #telegram
-from gtts import gTTS   #Google TTS
+# M101
 
-# System
-import json
-from tempfile import NamedTemporaryFile
-import random
-import httplib2
+# Import per funzionalità
 import re
 import os
 import math
 import time
+import json
+import random
 import datetime
 import importlib
+from tempfile import NamedTemporaryFile
+
+# Servizi esterni
+import telepot          #telegram
+from gtts import gTTS   #Google TTS
 
 #Strutture
 from strutture.messaggio import Messaggio
