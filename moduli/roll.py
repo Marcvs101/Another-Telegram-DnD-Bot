@@ -17,8 +17,9 @@ set_comandi = {"/roll"}
 def gestisci_comando(comando,messaggio,mittente,chat,start_time,dati,voce):
     messaggi = list()
 
-    if comando == "roll":
-        parametri = messaggio.lower().strip().split(" ")
+    if comando == "/roll":
+        
+        parametri = messaggio.replace("/roll ","").lower().strip().split(" ")
         
         somma_dadi = 0
         somma_costanti = 0
@@ -46,7 +47,7 @@ def gestisci_comando(comando,messaggio,mittente,chat,start_time,dati,voce):
             stringa += " + "+str(somma_costanti)+" -> "+str(somma_dadi + somma_costanti)
         stringa += "\n(Expected Value: "+str(expected_value + somma_costanti)+")"
 
-        messaggi.append(Messaggio(stringa,chat["id"],speech))
+        messaggi.append(Messaggio(stringa,chat["id"],voce))
     return messaggi
 
 # Funzione per popolare il comando help

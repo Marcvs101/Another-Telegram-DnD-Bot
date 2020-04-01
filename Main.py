@@ -237,8 +237,8 @@ def handler_messaggio(msg):
                     print("Module "+modulo+" has finished handling command "+comando)
                     print(str(time.time())+" : Module "+modulo+" has finished handling command "+comando,file=logfile)
                 except Exception as em:
-                    print("Catastrophic failure in module "+modulo+" while trying to handle command"+comando+"\n"+str(em)+"\n")
-                    print(str(time.time())+" : Catastrophic failure in module "+modulo+" while trying to handle command"+comando+"\n########\n"+str(em)+"\n########",file=logfile)
+                    print("Catastrophic failure in module "+modulo+" while trying to handle command "+comando+"\n"+str(em)+"\n")
+                    print(str(time.time())+" : Catastrophic failure in module "+modulo+" while trying to handle command "+comando+"\n########\n"+str(em)+"\n########",file=logfile)
 
         # Invio della coda di messaggi
         for i in messaggi:
