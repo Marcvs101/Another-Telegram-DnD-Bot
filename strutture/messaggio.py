@@ -1,6 +1,6 @@
 #Struttura messaggio
 class Messaggio:
-    def __init__(self,testo,canale,speech):
+    def __init__(self,testo,canale,voce):
         self.testo = testo
         self.canale = canale
-        self.speech = speech
+        self.voce = voce
